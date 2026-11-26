@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>X Following Exporter</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brand-icon" src="icons/icon-32.png" alt="" width="28" height="28">
+          <div class="brand-copy">
+            <h1>X Following Exporter</h1>
+            <p id="pageSubtitle" class="subtitle">检测当前页面中...</p>
+          </div>
+        </div>
+        <span id="statusBadge" class="badge">待命</span>
+      </header>
+
+      <section class="metrics" aria-label="采集核心指标">
+        <div class="metric">
+          <span class="metric-label">已采集</span>
+          <strong id="countValue" class="metric-value">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">主页关注数</span>
+          <strong id="profileExpectedValue" class="metric-value">未核对</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">差值</span>
+          <strong id="profileDiffValue" class="metric-value">-</strong>
+        </div>
+      </section>
+
+      <section class="surface" aria-label="运行状态与控制">
+        <div class="meta-line">
+          <span>模式：<strong id="modeValue">待命</strong></span>
+          <span>种子：<strong id="seedValue">未捕获</strong></span>
+          <span id="unavailableMeta" hidden>不可用：<strong id="unavailableValue">0</strong></span>
+        </div>
+
+        <p id="hintText" class="hint">
+          打开任意账号的 following 页面（如 x.com/用户名/following）后即可开始采集。
+        </p>
+
+        <div id="resumeBanner" class="resume-banner" hidden>
+          <span id="resumeBannerText">检测到本地断点快照</span>
+          <div class="resume-actions">
+            <button id="restoreBtn" class="ghost small" type="button">恢复</button>
+            <button id="discardSessionBtn" class="ghost small" type="button">清除</button>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <button id="startBtn" class="primary" type="button">开始导出</button>
+          <button id="pauseResumeBtn" class="ghost" type="button" disabled>暂停</button>
+          <button id="stopBtn" class="danger" type="button" disabled>停止</button>
+        </div>
+
+        <p id="errorText" class="error" hidden></p>
+      </section>
+
+      <section class="surface" aria-label="导出文件">
+        <div class="export-html-row">
+          <select id="htmlModeSelect" class="mode-select" aria-label="HTML 导出模式">
+            <option value="linked">轻量 HTML（在线头像）</option>
+            <option value="offline">完整离线 HTML（内嵌头像）</option>
+          </select>
+          <button id="exportHtmlBtn" class="primary" type="button" disabled>导出 HTML</button>
+        </div>
+
+        <div class="export-formats-row">
+          <button id="exportJsonBtn" class="ghost" type="button" disabled>导出 JSON</button>
+          <button id="exportCsvBtn" class="ghost" type="button" disabled>导出 CSV</button>
+          <button id="exportLogBtn" class="ghost" type="button" disabled>导出日志</button>
+        </div>
+      </section>
+
+      <details class="debug-disclosure">
+        <summary>调试信息与运行事件</summary>
+        <div class="debug-body">
+          <dl class="debug-list">
+            <div><dt>停止原因</dt><dd id="debugStopReason">-</dd></div>
+            <div><dt>直连页数</dt><dd id="debugDirectPages">0</dd></div>
+            <div><dt>停滞轮数</dt><dd id="debugStagnantRounds">0</dd></div>
+            <div><dt>缓存包数</dt><dd id="debugCacheSize">0</dd></div>
+            <div><dt>限流余量</dt><dd id="debugRateLimit">-</dd></div>
+            <div><dt>当前游标</dt><dd id="debugCursor" class="mono">-</dd></div>
+          </dl>
+          <pre id="debugEvents" class="debug-events">-</pre>
+          <div class="debug-footer">
+            <button id="refreshBtn" class="ghost small" type="button">立即刷新状态</button>
+          </div>
+        </div>
+      </details>
+    </main>
+
+    <script type="module" src="panel/panel.js"></script>
+  </body>
+</html>

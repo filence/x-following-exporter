@@ -1,0 +1,26 @@
+# Signing keys & credentials (NEVER commit)
+*.pem
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+
+# Build & packaged artifacts (distribute via GitHub Releases instead)
+*.crx
+*.zip
+
+# Personal export outputs
+x-following-*.html
+x-following-*.json
+x-following-*.csv
+x-following-log-*.json
+
+# OS & editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+node_modules/
